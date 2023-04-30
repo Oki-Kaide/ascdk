@@ -1,0 +1,81 @@
+{
+  "name": "as-chain-tests",
+  "version": "0.0.1",
+  "description": "chain module for assemblyscript",
+  "main": "js/index.js",
+  "types": "assembly/index.ts",
+  "author": "learnforpractice <learnforpractice@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uuosio/as-chain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uuosio/as-chain/issues"
+  },
+  "keywords": [
+    "wasm",
+    "webassembly",
+    "assemblyscript"
+  ],
+  "scripts": {
+    "build": "run-p build:* --max-parallel 3",
+    "build:name": "npx eosio-asc testname.ts --target release",
+    "build:publickey": "npx eosio-asc testpublickey.ts --target release",
+    "build:table": "npx eosio-asc testtable.ts --target release",
+    "build:asset": "npx eosio-asc testasset.ts --target release",
+    "build:action": "npx eosio-asc testaction.ts --target release",
+    "build:contract": "npx eosio-asc ./testcontract/testcontract/testcontract.ts --target release",
+    "build:mi": "npx eosio-asc testmi.ts --target release",
+    "build:serializer": "npx eosio-asc testserializer.ts --target release",
+    "build:crypto": "npx eosio-asc testcrypto.ts --target release",
+    "build:system": "npx eosio-asc testsystem.ts --target release",
+    "build:print": "npx eosio-asc testprint.ts --target release",
+    "build:transaction": "npx eosio-asc testtransaction.ts --target release",
+    "build:singleton": "npx eosio-asc testsingleton.ts --target release",
+    "build:variant": "npx eosio-asc testvariant.ts --target release",
+    "build:gencode": "npx eosio-asc testgencode.ts --target release",
+    "build:optional": "npx eosio-asc testoptional.ts --target release",
+    "build:extension": "npx eosio-asc testbinaryextension.ts --target release",
+    "build:apply": "npx eosio-asc testapply.ts --target release",
+    "build:nocodegen": "npx eosio-asc testnocodegen.ts --target release",
+    "build:finalize": "npx eosio-asc testfinalize.ts --target release",
+    "test-all": "yarn build && run-ipyeos -m pytest -s -x test.py",
+    "test:name": "yarn build:name && run-ipyeos -m pytest -s -x test.py -k test_name",
+    "test:publickey": "yarn build:publickey && run-ipyeos -m pytest -s -x test.py -k test_publickey",
+    "test:table": "yarn build:table && run-ipyeos -m pytest -s -x test.py -k test_table",
+    "test:asset": "yarn build:asset && run-ipyeos -m pytest -s -x test.py -k test_asset",
+    "test:action": "yarn build:action && run-ipyeos -m pytest -s -x test.py -k test_action",
+    "test:mi": "yarn build:mi && run-ipyeos -m pytest -s -x test.py -k test_mi",
+    "test:serializer": "yarn build:serializer && run-ipyeos -m pytest -s -x test.py -k test_1serialize",
+    "test:crypto": "yarn build:crypto && run-ipyeos -m pytest -s -x test.py -k test_crypto",
+    "test:system": "yarn build:system && run-ipyeos -m pytest -s -x test.py -k test_system",
+    "test:print": "yarn build:print && run-ipyeos -m pytest -s -x test.py -k test_print",
+    "test:transaction": "yarn build:transaction && run-ipyeos -m pytest -s -x test.py -k test_tx",
+    "test:singleton": "yarn build:singleton && run-ipyeos -m pytest -s -x test.py -k test_singleton",
+    "test:variant": "yarn build:variant && run-ipyeos -m pytest -s -x test.py -k test_variant",
+    "test:gencode": "yarn build:gencode && run-ipyeos -m pytest -s -x test.py -k test_gencode",
+    "test:optional": "yarn build:optional && run-ipyeos -m pytest -s -x test.py -k test_optional",
+    "test:extension": "yarn build:extension && run-ipyeos -m pytest -s -x test.py -k test_binaryextension",
+    "test:contract": "yarn build:contract && run-ipyeos -m pytest -s -x test.py -k test_contract",
+    "test:apply": "yarn build:apply && run-ipyeos -m pytest -s -x test.py -k test_apply",
+    "test:nocodegen": "yarn build:nocodegen && run-ipyeos -m pytest -s -x test.py -k test_nocodegen",
+    "test:transform": "npx eosio-asc gencode testtransform.ts -o ./target",
+    "test:finalize": "yarn build:finalize && run-ipyeos -m pytest -s -x test.py -k test_finalize"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.19.22"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.19.22",
+    "npm-run-all": "^4.1.5"
+  },
+  "files": [
+    "assembly/",
+    "build/",
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "yarn.lock"
+  ]
+}

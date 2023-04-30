@@ -1,0 +1,22 @@
+{
+  "name": "eosio-asc",
+  "version": "0.2.2",
+  "description": "Build tool for building AssemblyScript projects",
+  "license": "MIT",
+  "main": "index.ts",
+  "author": "yjhmelody <yjh465402634@gmail.com>",
+  "scripts": {
+    "checks": "tsc -p tsconfig.json --noEmit",
+    "build": "rm -rf dist/* && tsc -p tsconfig.json"
+  },
+  "bin": {
+    "eosio-asc": "bin/eosio-asc.js"
+  },
+  "dependencies": {
+    "as-chain": "./as-packages/chain",
+    "assemblyscript": "0.18",
+    "handlebars": "4.7.7",
+    "ts-dedent": "^2.2.0",
+    "yargs": "^17.4.1"
+  }
+}

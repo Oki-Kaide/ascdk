@@ -1,0 +1,40 @@
+name: PR
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr:
+    strategy:
+      matrix:
+        python-version: [3.9]
+        step: ['test']
+        # step: ['lint', 'test:chain']
+    name: ${{ matrix.step }}
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -U pip setuptools
+          python3 -m pip install wheel
+          python3 -m pip install pytest
+          python3 -m pip install mpy-cross
+          python3 -m pip install pyeoskit
+      - name: Install EOS test framework
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
+          python3 -m pip install ipyeos
+      - name: ${{ matrix.step }}
+        run: |
+          yarn install --immutable | grep -v 'YN0013'
+          PYTHON_SHARED_LIB_PATH=${{ env.pythonLocation }}/lib/libpython3.9.so yarn ${{ matrix.step }}

@@ -1,0 +1,9 @@
+# we ignore examples lint now
+examples
+
+# ignore as-scale-codec now
+**/as-scale-codec
+
+# we ignore js lint now
+**/*.js
+**/~lib
